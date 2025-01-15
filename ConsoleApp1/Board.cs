@@ -5,32 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 using Statki;
 using static Statki.Gameplay;
+
 namespace lab_programowanie4
 {
     internal class Board
     {
+        public static int[][] board; 
 
-
-
-
-        public int[][] board;
-        public Board()
+         Board() 
         {
             board = new int[10][];
-
             for (int i = 0; i < 10; i++)
             {
-
                 board[i] = new int[10];
             }
-
             InitializeBoard(board);
         }
 
-
-
-
-        private void InitializeBoard(int[][] tab)
+        
+        public static void InitializeBoard(int[][] tab)
         {
             for (int i = 0; i < 10; i++)
             {
@@ -41,8 +34,8 @@ namespace lab_programowanie4
             }
         }
 
-
-        public void DisplayBoard(int[][] tab)
+       
+        public static void DisplayBoard(int[][] tab)
         {
             Console.WriteLine("   A B C D E F G H I J");
             for (int i = 0; i < 10; i++)
@@ -56,13 +49,9 @@ namespace lab_programowanie4
             }
         }
 
-
-
-
-
-        public void FogOfWar(int[][] tab)
+        
+        public static void FogOfWar(int[][] tab)
         {
-
             Console.WriteLine("  A B C D E F G H I J");
             for (int i = 0; i < 10; i++)
             {
@@ -80,48 +69,58 @@ namespace lab_programowanie4
                 }
                 Console.WriteLine();
             }
-
         }
 
-
-        public int PlayerRow()
+    
+        public static (int row, int col) GetPlayerCoordinates()
         {
+            int row = 0;
+            char col = '\0';
 
-
-            Console.WriteLine("Wybierz punkt na mapie");
-
-            Console.WriteLine("1-10");
-            int row = int.Parse(Console.ReadLine());
-            if (row > 10 || row < 1)
+            while (true)
             {
-                Console.WriteLine("Nie ma takiego położenia, spróbuj ponownie");
-                PlayerRow();
+                Console.WriteLine("Wybierz wiersz (1-10) oraz kolumnę (A-J) w formacie np. A5:");
+
+                
+                string input = Console.ReadLine()?.ToUpper();
+
+               
+                if (!string.IsNullOrEmpty(input) && input.Length == 2)
+                {
+                 
+                    col = input[0]; 
+                    string rowInput = input[1].ToString(); 
+
+                 
+                    if (col >= 'A' && col <= 'J')
+                    {
+                        
+                        if (int.TryParse(rowInput, out row) && row >= 1 && row <= 10)
+                        {
+                            row--; 
+                            break; 
+                        }
+                        else
+                        {
+                            Console.WriteLine("Nieprawidłowy wiersz. Spróbuj ponownie.");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Nieprawidłowa kolumna. Spróbuj ponownie.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Nieprawidłowy format. Podaj dane w formacie np. A5.");
+                }
             }
 
+           
+            int colIndex = col - 'A'; 
 
-            return row;
-
+            return (row, colIndex);
         }
-
-        public string PlayerCol()
-        {
-
-
-            Console.WriteLine("Wybierz punkt na mapie");
-
-            Console.WriteLine("A-J");
-            string col = Console.ReadLine();
-            if (col.Length != 1 && (col[0] < 'A' || col[0] > 'J'))
-            {
-                Console.WriteLine("Nie ma takiego położenia, spróbuj ponownie");
-                PlayerCol();
-            }
-
-
-            return col;
-
-        }
-
 
     }
 }

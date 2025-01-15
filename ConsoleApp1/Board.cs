@@ -50,6 +50,7 @@ namespace lab_programowanie4
         }
 
         
+        
         public static void FogOfWar(int[][] tab)
         {
             Console.WriteLine("  A B C D E F G H I J");
@@ -121,6 +122,9 @@ namespace lab_programowanie4
 
             return (row, colIndex);
         }
+
+
+       
 
     }
 }

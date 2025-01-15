@@ -12,11 +12,11 @@ namespace lab_programowanie4
     
 
 
-        private int[][] board;
+        public int[][] board;
         public Board()
         {
             board = new int[10][];
-            InitializeBoard();
+            InitializeBoard(board);
             for (int i = 0; i < 10; i++)
             {
 
@@ -25,19 +25,21 @@ namespace lab_programowanie4
         }
 
 
-        private void InitializeBoard()
+
+
+        private void InitializeBoard(int[][] tab)
         {
             for (int i = 0; i < 10; i++)
             {
                 for (int j = 0; j < 10; j++)
                 {
-                    board[i][j] = 0; 
+                   tab[i][j] = 0; 
                 }
             }
         }
 
 
-        public void DisplayBoard()
+        public void DisplayBoard(int[][] tab)
         {
             Console.WriteLine("  A B C D E F G H I J");
             for (int i = 0; i < 10; i++)
@@ -45,22 +47,22 @@ namespace lab_programowanie4
                 Console.Write((i + 1) + " "); 
                 for (int j = 0; j < 10; j++)
                 {
-                    Console.Write(board[i][j] + " ");
+                    Console.Write(tab[i][j] + " ");
                 }
                 Console.WriteLine();
             }
         }
 
         //funkcja strzelania daje false albo true
-        public bool PlaceShip(char column, int row )
+        public bool PlaceShip(int[][] tab, int row , char column)
         {
             int colIndex = column - 'A';
             int rowIndex = row - 1;
 
 
-            if (board[rowIndex][colIndex] == 0)
+            if (tab[rowIndex][colIndex] == 0)
             {
-                board[rowIndex][colIndex] = 2;
+                tab[rowIndex][colIndex] = 2;
                 return true;
             }
             else
@@ -70,19 +72,42 @@ namespace lab_programowanie4
             }
         }
 
-        // 1 nietrafiony 2 trafiony 3 nowy zesrzelony
-        // 24
+
+        public void FogOfWar(int[][] tab)
+        {
+
+            Console.WriteLine("  A B C D E F G H I J");
+            for (int i = 0; i < 10; i++)
+            {
+                Console.Write((i + 1) + " ");
+                for (int j = 0; j < 10; j++)
+                {
+                    if (tab[i][j] == 0 || tab[i][j] == 2)
+                    {
+                        Console.Write(tab[i][j] + "? ");
+                    }
+                    else
+                    {
+                        Console.Write(tab[i][j] + " ");
+                    }
+                }
+                Console.WriteLine();
+            }
+
+        }
+
+        
 
         // Metoda do oddania strzału w określone pole
-        public bool Shoot(char column, int row)
+        public bool Shoot(int[][] tab, int row, char column )
         {
             int colIndex = column - 'A'; // Zamiana litery na indeks kolumny
             int rowIndex = row - 1; // Zamiana numeru wiersza na indeks w tablicy
 
             // Sprawdzanie, czy trafiono w statek
-            if (board[rowIndex][colIndex] == 2)
+            if (tab[rowIndex][colIndex] == 2)
             {
-                board[rowIndex][colIndex] = 3; // "X" oznacza trafiony statek
+                tab[rowIndex][colIndex] = 3; // "X" oznacza trafiony statek
                 Console.WriteLine("Trafiono!");
                 return true;
             }
@@ -104,23 +129,5 @@ namespace lab_programowanie4
 
 
 
-    class Test
-    {
-        static void Main(string[] args)
-        {
-            Board board = new Board();
-            board.DisplayBoard();
-
-
-            board.PlaceShip('A', 1);
-            board.PlaceShip('B', 2);
-
-
-            board.Shoot('A', 1);
-            board.Shoot('C', 3);
-
-            board.DisplayBoard();
-        }
-    }
 }
 

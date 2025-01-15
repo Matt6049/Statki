@@ -17,12 +17,14 @@ namespace lab_programowanie4
         public Board()
         {
             board = new int[10][];
-            InitializeBoard(board);
+            
             for (int i = 0; i < 10; i++)
             {
 
                 board[i] = new int[10];
             }
+
+            InitializeBoard(board);
         }
 
 
@@ -42,10 +44,10 @@ namespace lab_programowanie4
 
         public void DisplayBoard(int[][] tab)
         {
-            Console.WriteLine("  A B C D E F G H I J");
+            Console.WriteLine("   A B C D E F G H I J"); 
             for (int i = 0; i < 10; i++)
             {
-                Console.Write((i + 1) + " "); 
+                Console.Write((i + 1).ToString().PadLeft(2) + " "); 
                 for (int j = 0; j < 10; j++)
                 {
                     Console.Write(tab[i][j] + " ");
@@ -54,7 +56,8 @@ namespace lab_programowanie4
             }
         }
 
-      
+
+
 
 
         public void FogOfWar(int[][] tab)

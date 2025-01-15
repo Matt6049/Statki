@@ -10,14 +10,14 @@ namespace lab_programowanie4
     internal class Board
     {
 
-    
+
 
 
         public int[][] board;
         public Board()
         {
             board = new int[10][];
-            
+
             for (int i = 0; i < 10; i++)
             {
 
@@ -36,7 +36,7 @@ namespace lab_programowanie4
             {
                 for (int j = 0; j < 10; j++)
                 {
-                   tab[i][j] = (int)TILE_TYPE.EMPTY; 
+                    tab[i][j] = (int)TILE_TYPE.EMPTY;
                 }
             }
         }
@@ -44,10 +44,10 @@ namespace lab_programowanie4
 
         public void DisplayBoard(int[][] tab)
         {
-            Console.WriteLine("   A B C D E F G H I J"); 
+            Console.WriteLine("   A B C D E F G H I J");
             for (int i = 0; i < 10; i++)
             {
-                Console.Write((i + 1).ToString().PadLeft(2) + " "); 
+                Console.Write((i + 1).ToString().PadLeft(2) + " ");
                 for (int j = 0; j < 10; j++)
                 {
                     Console.Write(tab[i][j] + " ");
@@ -83,19 +83,45 @@ namespace lab_programowanie4
 
         }
 
-        
 
-    
-    
-      
-    
+        public int PlayerRow()
+        {
 
 
+            Console.WriteLine("Wybierz punkt na mapie");
+
+            Console.WriteLine("1-10");
+            int row = int.Parse(Console.ReadLine());
+            if (row > 10 || row < 1)
+            {
+                Console.WriteLine("Nie ma takiego położenia, spróbuj ponownie");
+                PlayerRow();
+            }
 
 
+            return row;
+
+        }
+
+        public string PlayerCol()
+        {
+
+
+            Console.WriteLine("Wybierz punkt na mapie");
+
+            Console.WriteLine("A-J");
+            string col = Console.ReadLine();
+            if (col.Length != 1 && (col[0] < 'A' || col[0] > 'J'))
+            {
+                Console.WriteLine("Nie ma takiego położenia, spróbuj ponownie");
+                PlayerCol();
+            }
+
+
+            return col;
+
+        }
+
+
+    }
 }
-
-
-
-}
-

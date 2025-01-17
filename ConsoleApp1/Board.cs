@@ -74,51 +74,58 @@ namespace lab_programowanie4
 
     
            public static (int row, int col) GetPlayerCoordinates()
-   {
-       int row = 0;
-       char col = '\0';
+{
+    int row = 0;
+    char col = '\0';
 
-       while (true)
-       {
-           Console.WriteLine("Wybierz wiersz (1-10) oraz kolumnę (A-J) w formacie np. A5:");
+    while (true)
+    {
+        Console.WriteLine("Wybierz wiersz (1-10) oraz kolumnę (A-J) w formacie np. A5:");
 
-           
-           string input = Console.ReadLine()?.ToUpper();
+        
+        string input = Console.ReadLine()?.ToUpper();
 
-          
-           if (!string.IsNullOrEmpty(input) && ( input.Length == 2 || input.Length == 3))
-           {
-            
-               col = input[0];
-               string rowInput;
+       
+        if (!string.IsNullOrEmpty(input) && ( input.Length == 2 || input.Length == 3))
+        {
+         
+            col = input[0];
+            string rowInput;
 
-               rowInput = (input.Length == 3) ? input[0].ToString() + input[1].ToString() : input[1].ToString();
+            rowInput = (input.Length == 3) ? input[1].ToString() + input[2].ToString() : input[1].ToString();
 
 
 
-               if (col >= 'A' && col <= 'J')
-               {
-                   
-                   if (int.TryParse(rowInput, out row) && row >= 1 && row <= 10)
-                   {
-                       row--; 
-                       break; 
-                   }
-                   else
-                   {
-                       Console.WriteLine("Nieprawidłowy wiersz. Spróbuj ponownie.");
-                   }
-               }
-               else
-               {
-                   Console.WriteLine("Nieprawidłowa kolumna. Spróbuj ponownie.");
-               }
-           }
-           else
-           {
-               Console.WriteLine("Nieprawidłowy format. Podaj dane w formacie np. A5.");
-           }
-       }
+            if (col >= 'A' && col <= 'J')
+            {
+                
+                if (int.TryParse(rowInput, out row) && row >= 1 && row <= 10)
+                {
+                    row--; 
+                    break; 
+                }
+                else
+                {
+                    Console.WriteLine("Nieprawidłowy wiersz. Spróbuj ponownie.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Nieprawidłowa kolumna. Spróbuj ponownie.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Nieprawidłowy format. Podaj dane w formacie np. A5.");
+        }
+    }
+
+   
+    int colIndex = col - 'A'; 
+
+    return (row, colIndex);
+}
+
 
       
        int colIndex = col - 'A'; 

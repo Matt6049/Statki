@@ -51,26 +51,26 @@ namespace lab_programowanie4
 
         
         
-        public static void FogOfWar(int[][] tab)
+       public static void FogOfWar(int[][] tab)
+{
+    Console.WriteLine("  A B C D E F G H I J");
+    for (int i = 0; i < 10; i++)
+    {
+        Console.Write((i + 1) + " ");
+        for (int j = 0; j < 10; j++)
         {
-            Console.WriteLine("  A B C D E F G H I J");
-            for (int i = 0; i < 10; i++)
+            if (tab[i][j] == (int)TILE_TYPE.EMPTY || tab[i][j] == (int)TILE_TYPE.SHIP)
             {
-                Console.Write((i + 1) + " ");
-                for (int j = 0; j < 10; j++)
-                {
-                    if (tab[i][j] == (int)TILE_TYPE.EMPTY || tab[i][j] == (int)TILE_TYPE.SHIP)
-                    {
-                        Console.Write(tab[i][j] + "? ");
-                    }
-                    else
-                    {
-                        Console.Write(tab[i][j] + " ");
-                    }
-                }
-                Console.WriteLine();
+                Console.Write( "? ");
+            }
+            else
+            {
+                Console.Write(tab[i][j] + " ");
             }
         }
+        Console.WriteLine();
+    }
+}
 
     
         public static (int row, int col) GetPlayerCoordinates()
